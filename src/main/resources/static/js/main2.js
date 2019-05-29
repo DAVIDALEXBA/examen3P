@@ -24,7 +24,7 @@ Vue.component("my-categories",{
 	           <ul class="list-group">
 	           		<br><br>
 	           		<h1>Lista de preguntas para esa materia!</h1>
-					<h4 class="list-group-item" v-for="c in preguntas" >{{c.preguntas}}</h4>	 
+					<h4 class="list-group-item"  >{{preguntas}}</h4>	 
 					     
 	           </ul>
 	           
@@ -91,19 +91,25 @@ Vue.component("my-categories",{
 
 				var numero = indices.length + 1;
 				
-				for(var i = 0; i < (numero*2); i++) {
+				for(var i = 0; i < 1; i++) {
 				
-					if((i%2)==0){
-						
-						indices2[i] = this.app.preguntas[0].preguntas.split("¬")[i];
-						
-					}
+											
+						indices2[i] = this.app.preguntas[0].preguntas.split("¬");
+						alert(indices2[i]);
 					
 				}
 				
 				
+				var cadena = indices2.toString().trim(),
+			    patron = /,/g,
+			    nuevoValor    = " ",
+			    nuevaCadena = cadena.replace(patron, nuevoValor);
 				
-				this.app.preguntas=response.data;
+				var cadena2 = nuevaCadena,
+			    patron2 = /0/g,
+			    nuevoValor2    = "\n",
+			    nuevaCadena2 = cadena2.replace(patron2, nuevoValor2);
+				this.app.preguntas=nuevaCadena2;
 			})
 		}
 	}
