@@ -80,6 +80,7 @@ Vue.component("my-categories",{
 			})
 			.then(function (response) {
 				console.log(response.data);
+				alert(response.data);
 				this.app.preguntas=response.data;
 			})
 		}
@@ -298,13 +299,12 @@ var app = new Vue({
             
             var id='';
             var fd= new FormData();
-            $(document).ready(function() {
-                // Así accedemos al Valor de la opción seleccionada
+            
                 var valor = $("#categoria option:selected").html();
                
                 id = valor.split(" ", 1);
             	
-            });
+            
             fd.append("id_materia", id);
 			fd.append("preguntas", this.data);
 			axios({
