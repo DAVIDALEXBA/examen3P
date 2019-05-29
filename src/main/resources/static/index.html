@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-control" content="public">
+<meta http-equiv="Cache-control" content="private">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache-control" content="no-store">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="shortcut icon" sizes="192x192" href="icons8-year-of-ox-100.png">
+<title>Generador de Examenes :)</title>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/axios.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+</head>
+<body>
+   
+    <div id="app">
+    
+        <div class="alert alert-primary" role="alert">
+              <h1><button type="button" class="btn btn-link" v-if="opcion!='menu'" @click="opcion='menu'"> <img alt="" src="https://image.flaticon.com/icons/svg/60/60577.svg" height="40px" width="40px"> </button> Sistema LaSallePOS</h1>
+        </div>
+        
+        
+        <ul class="list-group" v-if="opcion=='menu'">
+          <li class="list-group-item" @click="opcion='categoria'">Materias</li>
+          <li class="list-group-item" @click="opcion='agregar'">Agregar</li>
+         
+        </ul>
+        
+                
+        <my-categories v-bind:categoria="categoria" v-bind:preguntas="preguntas" v-if="opcion=='categoria'"></my-categories>
+        <my-products v-bind:categoria="categoria" v-bind:producto="producto" v-if="opcion=='productos'"></my-products>
+        <div v-if="opcion=='agregar'">
+	        <h2>Página de prueba para preguntas de exámenes</h2>
+	               
+	               <my-list v-bind:categoria="categoria"></my-list>
+	                <div id="app">
+	                    
+	                    <div class="box">
+	                        <label for="preg">Pregunta</label>
+	                        <input type="text" name="preg" size="85" v-model="current_preg" @keyup.enter="fn_add">
+	                        <input type="button" value="+" @click="fn_add" >
+	                    </div>
+	                    <ul v-if="pregs.length>0">
+	                        <li v-for="(preg,index) in pregs">{{preg.desc}} <button @click="fn_remove_question(index)">x</button><br>
+	                            <respuesta-component v-bind:index="index" v-bind:preg="preg"></respuesta-component>
+	                        </li>
+	                    </ul>
+	                </div>
+	               <button @click="fn_ver">Enviar al servidor</button>
+	                <pre>* Esto no tiene validaciones sobre textos u obligatoriedad de respuestas, pero es la base.</pre>
+	               
+        
+        
+        </div>
+               
+    </div>
+    
+    <script type="text/javascript" src="js/main2.js"></script>
+</body>
+</html>

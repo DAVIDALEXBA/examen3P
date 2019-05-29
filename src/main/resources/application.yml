@@ -1,0 +1,12 @@
+spring:
+    datasource: 
+        platform: h2
+        url: jdbc:h2:tcp://localhost/~/db1
+        username: sa
+        password:
+        
+        
+mybatis:
+    configuration: 
+        map-underscore-to-camel-case: true
+       
