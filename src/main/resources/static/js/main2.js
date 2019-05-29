@@ -24,7 +24,7 @@ Vue.component("my-categories",{
 	           <ul class="list-group">
 	           		<br><br>
 	           		<h1>Lista de preguntas para esa materia!</h1>
-					<h4 class="list-group-item"  >{{preguntas}}</h4>	 
+					<h4 class="list-group-item"  v-for="c in preguntas">{{c}} <a class="btn btn-primary" >Eliminar pregunta</a></h4>	 
 					     
 	           </ul>
 	           
@@ -104,12 +104,15 @@ Vue.component("my-categories",{
 			    patron = /,/g,
 			    nuevoValor    = " ",
 			    nuevaCadena = cadena.replace(patron, nuevoValor);
-				
+
 				var cadena2 = nuevaCadena,
-			    patron2 = /0/g,
-			    nuevoValor2    = "\n",
+			    patron2 = /\n/g,
+			    nuevoValor2    = " >> ",
 			    nuevaCadena2 = cadena2.replace(patron2, nuevoValor2);
-				this.app.preguntas=nuevaCadena2;
+				this.app.preguntas=nuevaCadena2.split(" >> ");
+				
+				
+				
 			})
 		}
 	}
@@ -319,7 +322,7 @@ var app = new Vue({
                     resps[j]=fn_clean_prepare(this.pregs[i].resps[j].desc);
                     if( this.pregs[i].resps[j].isTheRightAnswer) index=j;
                 }
-                arr.push(fn_clean_prepare(this.pregs[i].desc) + '¬'+ resps.join('·') + '¬' + index)
+                arr.push(fn_clean_prepare(this.pregs[i].desc) + '¬'+ resps.join('·') + '¬' + index + '¬')
             }
             this.data=arr.join('\n');
             console.log(this.data);
