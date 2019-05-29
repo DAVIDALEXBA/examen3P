@@ -35,7 +35,7 @@
         </ul>
         
                 
-        <my-categories v-bind:categoria="categoria" v-bind:preguntas="preguntas" v-if="opcion=='categoria'"></my-categories>
+        <my-categories v-bind:categoria="categoria" v-bind:preguntas="preguntas" v-bind:examen="examen" v-if="opcion=='categoria'"></my-categories>
         <my-products v-bind:categoria="categoria" v-bind:producto="producto" v-if="opcion=='productos'"></my-products>
         <div v-if="opcion=='agregar'">
 	        <h2>Página de prueba para preguntas de exámenes</h2>

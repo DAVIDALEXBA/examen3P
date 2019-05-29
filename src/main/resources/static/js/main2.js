@@ -18,7 +18,7 @@ Vue.component("my-categories",{
 	    </form>
     
         <ul class="list-group" v-if="categoria.length>0">
-           <li class="list-group-item" v-for="c in categoria">{{c.id}}  {{c.nombre}} <a @click="fn_ver(c.id)" class="btn btn-primary" @click="opcion='agregar'">Ver preguntas</a></li>
+           <li class="list-group-item" v-for="c in categoria">{{c.id}}  {{c.nombre}} <a @click="fn_ver(c.id)" class="btn btn-primary" @click="opcion='agregar'">Ver preguntas</a>  <a @click="fn_ver(c.id)" class="btn btn-primary" @click="opcion='agregar'">Generar Examen</a></li>
 	           
 	           <div v-if="preguntas.length>0">
 	           <ul class="list-group">
@@ -30,7 +30,15 @@ Vue.component("my-categories",{
 	           
 	           </div>
 	            
-			          
+			      <div v-if="examen.length>0">
+	           <ul class="list-group">
+	           		<br><br>
+	           		<h1>Lista de preguntas para el examen!</h1>
+					<h4 class="list-group-item"  v-for="c in examen">{{c}}</h4>	 
+					     
+	           </ul>
+	           
+	           </div>    
              
        
         </ul>
@@ -43,7 +51,7 @@ Vue.component("my-categories",{
 		
 	</div>
 	`,
-	props:['categoria', 'preguntas'],
+	props:['categoria', 'preguntas', 'examen'],
 	mounted: function() {
 		console.log('Iniciando componente my-categores')
 		axios.get('/examen/todos')
@@ -85,6 +93,7 @@ Vue.component("my-categories",{
 				var cadena = this.app.preguntas[0].preguntas;
 				var indices = [];
 				var indices2 = [];
+				var examenes = [];
 				for(var i = 0; i < cadena.length; i++) {
 						if (cadena[i].toLowerCase() === "\n") indices.push(i);
 				}
@@ -95,7 +104,7 @@ Vue.component("my-categories",{
 				
 											
 						indices2[i] = this.app.preguntas[0].preguntas.split("¬");
-						alert(indices2[i]);
+						
 					
 				}
 				
@@ -111,7 +120,20 @@ Vue.component("my-categories",{
 			    nuevaCadena2 = cadena2.replace(patron2, nuevoValor2);
 				this.app.preguntas=nuevaCadena2.split(" >> ");
 				
+				//al azar
 				
+				var n=this.app.preguntas.length;
+				alert(n);
+				
+				for(var i=0; i<5; i++){
+					numero=Math.floor(Math.random()*n);
+					
+					examenes[i] = (this.app.preguntas[numero]);
+					alert(examenes[i]);
+					
+				}
+				
+				this.app.examen =  examenes;
 				
 			})
 		}
@@ -300,6 +322,7 @@ var app = new Vue({
         message: 'Hello Vue!',
         categoria:[],
         preguntas:[],
+        examen:[],
         producto:[],
         opcion:'menu'
     },
