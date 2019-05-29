@@ -125,10 +125,14 @@ Vue.component("my-categories",{
 				var n=this.app.preguntas.length;
 				alert(n);
 				
+				var lista = [1,2,3,4,5,6,7,8,9,10];
+				lista = lista.sort(function() {return Math.random() - 0.5});
+				//alert(lista.length);
+				
 				for(var i=0; i<5; i++){
-					numero=Math.floor(Math.random()*n);
 					
-					examenes[i] = (this.app.preguntas[numero]);
+					
+					examenes[i] = (this.app.preguntas[lista[i]]);
 					alert(examenes[i]);
 					
 				}
