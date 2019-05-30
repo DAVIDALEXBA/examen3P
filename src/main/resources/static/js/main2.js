@@ -125,7 +125,12 @@ Vue.component("my-categories",{
 				var n=this.app.preguntas.length;
 				alert(n);
 				
-				var lista = [1,2,3,4,5,6,7,8,9,10];
+				var lista = [0,1,2,3,4,5,6,7,8,9];
+				
+				
+				
+				
+				
 				lista = lista.sort(function() {return Math.random() - 0.5});
 				//alert(lista.length);
 				
