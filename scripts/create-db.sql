@@ -21,7 +21,7 @@ create table producto(
 create table examen(
     id integer auto_increment primary key,
     id_materia varchar(32) not null,
-    preguntas varchar(100) null
+    preguntas text null
     foreign key (categoria_materia)
 );
 create table materia(
